@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue.js | Yazılım Bilimleri</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <style>
+        ul{
+            margin-top: 10px;
+            margin:0px;
+            padding: 0px;
+            list-style-type: none;
+            width: 300px;
+        }
+        li{
+            padding: 2px 5px;
+            margin-bottom: 5px;
+            border-bottom: 1px solid #ccc;
+            text-align: left;
+        }
+        .red{
+            background-color: crimson;
+        }
+        .green{
+            background-color: limegreen;
+        }
+    </style>
+</head>
+<body>
+    
+
+    <div id="app">
+        <ul>
+            <li v-for="i in list0">Ayva</li>
+        </ul>
+            <hr>
+        <ul>
+            <li v-for="i in list0">{{ i }}</li>
+        </ul>
+            <hr>
+        <ul>
+            <li v-for="item in 5"><strong>{{ item }}</strong></li>
+        </ul>
+            <hr>
+        <ul>
+            <li v-for="(value,key) in personel">{{ key + ": " + value }}</li>
+        </ul>
+            <hr>
+        <ul>
+            Adet: <input type="text" v-model="sellCount">
+            <li v-for="product in product_list" :class="bgByCount(product)">
+                <span>{{ product.title }} - {{ product.count }}</span>
+                <button v-if="product.count>0" @click="product.count -= sellCount">Satıldı</button>
+                <button :disabled="product.count==0" @click="sellProduct(product)">Satıldı</button>
+            </li>
+            
+        </ul>
+        <p v-if="sellWarning" style="color:red; font-weight:bold;">Girdiğiniz Miktar Stok Adetlerinden Büyüktür.</p>
+    </div>
+
+    <script>
+        new Vue({
+            el: "#app",
+            data:{
+                sellCount: 0,
+                sellWarning:false,
+                list0: ["Elma","Armut","Kiraz"],
+                personel:{
+                    name:"Talha",
+                    lastname:"Çelik",
+                    email: "test@gmail.com",
+                },
+                product_list:[
+                    {
+                        title:"Macbook Pro",
+                        price:100,
+                        count:0
+                    },
+                    {
+                        title:"iPhone",
+                        price:50,
+                        count:100
+                    },
+                    {
+                        title:"Klavye",
+                        price:10,
+                        count:1000
+                    }
+                ]
+            },
+            methods:{
+                sellProduct(product){
+                    if (this.sellCount > product.count){
+                        this.sellWarning = true
+                    } else {
+                        product.count = product.count- this.sellCount
+                        this.sellWarning = false
+                    }
+                },
+                bgByCount(product){
+                    return {'green' : product.count > 0, 'red' : product.count <= 0}
+                },
+            },
+            computed:{
+            },
+            watch:{
+
+            },
+        });
+
+
+    </script>
+</body>
+</html>

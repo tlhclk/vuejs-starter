@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue.js | Yazılım Bilimleri</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    
+
+    <div id="app">
+        <h1> {{ title }}</h1> 
+        <input type="text" @keypress.enter="keyp2($event)">
+        <input type="text" v-on:keypress="keyp($event)">
+        <button v-on:click="arttir2()"> {{ buttonTitle }}</button>
+        <p>{{ sayi }}</p>
+        <p v-text="inputValue"></p>
+        <p v-text="paragraph"></p>
+        <a v-bind:href="link" v-bind:data-id="dataId">Video Sinif</a>
+        <a :href="link" v-bind:data-id="dataId">Video Sinif</a>
+        <p v-html="details"></p>
+    </div>
+
+    <script>
+        new Vue({
+            el:"#app",
+            data: {
+                title:"test başlık",
+                buttonTitle: "Arttır",
+                paragraph: "lorem ipsum dolor sit ameri",
+                link: "https://www.videosinif.com",
+                dataId:1,
+                details: "<b> Bu bir haber detayıdır....</b>",
+                sayi: 12,
+                inputValue:""
+            },
+            methods:{
+                arttir: function(){},
+                arttir2(){
+                    this.sayi++
+
+                },
+                keyp(e){
+                    if (e.keyCode == 13){
+                        this.sayi +=parseInt(e.target.value)
+                    }
+                    this.inputValue=e.target.value
+                },
+                keyp2(e){
+                    this.sayi +=parseInt(e.target.value)
+                    this.inputValue=e.target.value
+                },
+            },
+        });
+
+
+    </script>
+</body>
+</html>

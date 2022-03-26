@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue.js | Yazılım Bilimleri</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <style>
+        .box{
+            width: 100px;
+            height: 200px;
+            border: 1px solid #666;
+            background-color: #fbbd08;
+            margin-bottom: 10px;
+        }
+        .blue{
+            background-color: blue;
+        }
+
+    </style>
+</head>
+<body>
+    
+
+    <div id="app">
+        <div class="box" :class="class1"></div>
+        <div class="box" :class="{'blue': !showBlue }"></div>
+        <div class="box" :class="changeClass"></div>
+        <div :style="{'background-color':'black'}" class="box"></div>
+        <button @click="showBlue = !showBlue">Ekle/Kaldır</button>
+    </div>
+
+    <script>
+        new Vue({
+            el: "#app",
+            data:{
+                class1:"blue",
+                showBlue: true
+            },
+            computed:{
+                changeClass(){
+                    return {'blue':this.showBlue}
+                }
+            }
+        });
+
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue.js | Yazılım Bilimleri</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    
+
+    <div id="app">
+        <input type="text" v-model="yas">
+        <button @click="arttir()">Arttır</button>
+        <p>{{ yas>=18 ? "Reşittir" : "Reşit Değildir" }}</p>
+        <p>{{ ageWritter() }}</p>
+        <hr>
+        <p>{{ ageWritterComp }}</p>
+        <p>{{ sayi }}</p>
+        <button @click="sayi++">Sayı Arttır...</button>
+    </div>
+
+    <script>
+        new Vue({
+            el:"#app",
+            data: {
+                yas: 0,
+                sayi:0,
+                inputValue:""
+            },
+            methods:{
+                ageWritter(){
+                    return this.yas >=18 ? "Reşittir" : "Reşit Değildir"
+                    
+                },
+            },
+            computed:{
+                ageWritterComp(){
+                    return (parseInt(this.yas) + parseInt(this.sayi)) >=18 ? "Reşittir" : "Reşit Deildir"
+                }
+            },
+            watch:{
+                yas(newValue,oldValue){
+                    console.log("newValue:" + newValue);
+                    console.log("oldValue:" + oldValue);
+                }
+            }
+        });
+
+
+    </script>
+</body>
+</html>
